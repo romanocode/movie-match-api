@@ -2,6 +2,10 @@
   "name": "movie-match-api",
   "version": "1.0.0",
   "scripts": {
-    "search": "node movie.js"
+    "search": "node movie.js",
+    "start": "node movie.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
