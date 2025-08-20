@@ -1,11 +1,17 @@
 {
   "name": "movie-match-api",
   "version": "1.0.0",
+  "main" : "index.js",
+  "type" : "module",
   "scripts": {
-    "search": "node movie.js",
-    "start": "node movie.js"
+    "search": "index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
