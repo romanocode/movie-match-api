@@ -22,18 +22,18 @@ const swaggerOptions = {
       description: "API para gestionar películas 🚀",
     },
     servers: [
-      { url: "http://localhost:3000" }
+      { url: `http://localhost:${port}` }, // local
+      { url: "https://tu-app.up.railway.app" } // URL de Railway
     ],
   },
-  apis: ["./routes/routesMovies.routes.js"], // aquí indicas dónde buscar los comentarios JSDoc
+  apis: ["./routes/routesMovies.routes.js"],
 };
 
 const specs = swaggerJsdoc(swaggerOptions);
 
-
 // Middlewares globales
 app.use(cors());
-app.use(express.json()); // importante para manejar JSON en requests
+app.use(express.json());
 app.use(logRequest);
 
 // Rutas
@@ -41,11 +41,6 @@ app.use(api);
 
 // Swagger
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
-
-
-app.listen(port, () => {
-  console.log(`Servidor corriendo en puerto ${port}`);
-});
 
 // Ruta raíz
 app.get("/", (req, res) => {
@@ -55,6 +50,7 @@ app.get("/", (req, res) => {
 // Error handler
 app.use(errorHandler);
 
+// Solo un listen
 app.listen(port, () => {
-  console.log(`http://localhost:${port}`);
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
