@@ -1,11 +1,12 @@
-import fs from "fs";
+import { movies } from "../models/movie.model.js";
+
 
 export function getAllMovies(req, res) {
    try {
-      const data = fs.readFileSync("./data/movie.json", "utf8");
-      const movies = JSON.parse(data); // Parser el JSON a un objeto
-      res.json(movies);
+      const allMovies = movies();
+      res.json(allMovies);
+   
    } catch (error) {
       res.status(500).json({ error: "No se pudo leer el archivo de películas" });
    }
-}
+};

@@ -1,15 +1,19 @@
 {
   "name": "movie-match-api",
   "version": "1.0.0",
-  "main" : "index.js",
-  "type" : "module",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "search": "index.js",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

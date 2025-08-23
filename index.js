@@ -1,11 +1,52 @@
 import express from "express";
-import {api} from './routes/routesMovies.routes.js';
+import cors from "cors";
+import { api } from "./routes/routesMovies.routes.js";
+import { logRequest } from "./middlewares/logger.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
-const app = express(); 
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
+
+const app = express();
 const port = 3000;
 
-app.use(api)
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Movie Match API",
+      version: "1.0.0",
+      description: "API para gestionar películas 🚀",
+    },
+    servers: [
+      { url: "http://localhost:3000" }
+    ],
+  },
+  apis: ["./routes/routesMovies.routes.js"], // aquí indicas dónde buscar los comentarios JSDoc
+};
+
+const specs = swaggerJsdoc(swaggerOptions);
+
+
+// Middlewares globales
+app.use(cors());
+app.use(express.json()); // importante para manejar JSON en requests
+app.use(logRequest);
+
+// Rutas
+app.use(api);
+
+// Swagger
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.json({ message: "API funcionando 🚀" });
+});
+
+// Error handler
+app.use(errorHandler);
 
 app.listen(port, () => {
-    console.log(`http://localhost:${port}`);
-})
+  console.log(`http://localhost:${port}`);
+});
