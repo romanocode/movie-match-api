@@ -1,14 +1,17 @@
 import express from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 import { api } from "./routes/routesMovies.routes.js";
 import { logRequest } from "./middlewares/logger.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
+dotenv.config();
+
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const swaggerOptions = {
   definition: {
