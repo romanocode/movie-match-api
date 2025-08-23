@@ -42,6 +42,11 @@ app.use(api);
 // Swagger
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
+
+app.listen(port, () => {
+  console.log(`Servidor corriendo en puerto ${port}`);
+});
+
 // Ruta raíz
 app.get("/", (req, res) => {
   res.json({ message: "API funcionando 🚀" });
